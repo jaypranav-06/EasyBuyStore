@@ -35,3 +35,8 @@ yarn-error.log*
 
 # Prisma
 /prisma/migrations
+
+# Database exports and backups
+/database_exports/
+*.sql
+database_backup_*.sql
