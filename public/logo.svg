@@ -1,0 +1,32 @@
+<svg width="180" height="50" viewBox="0 0 180 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Shopping Bag Icon with elegant design -->
+  <g>
+    <!-- Bag body -->
+    <path d="M8 15 L4 38 C3.8 40 5 42 7 42 L28 42 C30 42 31.2 40 31 38 L27 15 Z" fill="#2C2C2C"/>
+    <path d="M8 15 L4 38 C3.8 40 5 42 7 42 L28 42 C30 42 31.2 40 31 38 L27 15 Z" fill="url(#goldGradient)" opacity="0.3"/>
+
+    <!-- Bag top -->
+    <rect x="6" y="13" width="23" height="3" rx="1.5" fill="#2C2C2C"/>
+
+    <!-- Handle -->
+    <path d="M11 13 C11 8 13 6 17.5 6 C22 6 24 8 24 13" stroke="#D4AF37" stroke-width="2" stroke-linecap="round" fill="none"/>
+
+    <!-- Decorative accent -->
+    <circle cx="17.5" cy="28" r="1.5" fill="#D4AF37"/>
+  </g>
+
+  <!-- Text: EasyBuyStore -->
+  <text x="40" y="28" font-family="'Playfair Display', serif" font-size="20" font-weight="700" fill="#2C2C2C" letter-spacing="-0.5">EasyBuy</text>
+  <text x="116" y="28" font-family="'Playfair Display', serif" font-size="20" font-weight="700" fill="#D4AF37">Store</text>
+
+  <!-- Tagline -->
+  <text x="40" y="40" font-family="'Inter', sans-serif" font-size="8" fill="#6B6B6B" letter-spacing="0.5">SHOP SMART, SHOP EASY</text>
+
+  <!-- Gradient Definitions -->
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4AF37;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B7355;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>

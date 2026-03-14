@@ -22,7 +22,7 @@ export default function CartPage() {
           <p className="text-gray-600 mb-6">Add some products to get started!</p>
           <Link
             href="/products"
-            className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+            className="inline-block bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary transition"
           >
             Shop Now
           </Link>
@@ -57,12 +57,12 @@ export default function CartPage() {
                   <div className="flex-1">
                     <Link
                       href={`/products/${item.product_id}`}
-                      className="font-semibold text-gray-900 hover:text-blue-600"
+                      className="font-semibold text-gray-900 hover:text-primary"
                     >
                       {item.product_name}
                     </Link>
                     <p className="text-lg font-bold text-gray-900 mt-2">
-                      ${(item.discount_price || item.price).toFixed(2)}
+                      Rs {(item.discount_price || item.price).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </p>
 
                     {/* Quantity Controls */}
@@ -98,7 +98,7 @@ export default function CartPage() {
                   {/* Item Total */}
                   <div className="text-right">
                     <p className="text-lg font-bold text-gray-900">
-                      ${((item.discount_price || item.price) * item.quantity).toFixed(2)}
+                      Rs {((item.discount_price || item.price) * item.quantity).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </p>
                   </div>
                 </div>
@@ -122,33 +122,33 @@ export default function CartPage() {
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-gray-600">
                   <span>Subtotal</span>
-                  <span>${subtotal.toFixed(2)}</span>
+                  <span>Rs {subtotal.toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                 </div>
                 <div className="flex justify-between text-gray-600">
                   <span>Shipping</span>
-                  <span>{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
+                  <span>{shipping === 0 ? 'Free' : `$Rs {shipping.toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}</span>
                 </div>
                 <div className="flex justify-between text-gray-600">
                   <span>Tax (10%)</span>
-                  <span>${tax.toFixed(2)}</span>
+                  <span>Rs {tax.toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                 </div>
                 <div className="border-t pt-3">
                   <div className="flex justify-between text-lg font-bold text-gray-900">
                     <span>Total</span>
-                    <span>${total.toFixed(2)}</span>
+                    <span>Rs {total.toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                   </div>
                 </div>
               </div>
 
               {subtotal < 50 && (
                 <p className="text-sm text-gray-600 mb-4">
-                  Add ${(50 - subtotal).toFixed(2)} more for free shipping!
+                  Add Rs {(50 - subtotal).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} more for free shipping!
                 </p>
               )}
 
               <Link
                 href="/checkout"
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition flex items-center justify-center gap-2"
+                className="w-full bg-gradient-to-r from-primary to-accent text-white py-3 rounded-lg font-semibold hover:from-primary-light hover:to-accent-light transition flex items-center justify-center gap-2"
               >
                 Proceed to Checkout
                 <ArrowRight className="w-5 h-5" />
@@ -156,7 +156,7 @@ export default function CartPage() {
 
               <Link
                 href="/products"
-                className="block text-center text-blue-600 hover:text-blue-700 mt-4 font-semibold"
+                className="block text-center text-primary hover:text-primary-light mt-4 font-semibold"
               >
                 Continue Shopping
               </Link>

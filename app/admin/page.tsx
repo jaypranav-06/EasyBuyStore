@@ -62,27 +62,27 @@ export default async function AdminDashboard() {
   const statCards = [
     {
       title: 'Total Revenue',
-      value: `$${Number(stats.totalRevenue).toFixed(2)}`,
+      value: `Rs ${Number(stats.totalRevenue).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`,
       icon: DollarSign,
       color: 'bg-green-500',
       bgColor: 'bg-green-50',
-      textColor: 'text-green-600',
+      textColor: 'text-success',
     },
     {
       title: 'Total Orders',
       value: stats.totalOrders.toString(),
       icon: ShoppingCart,
-      color: 'bg-blue-500',
-      bgColor: 'bg-blue-50',
-      textColor: 'text-blue-600',
+      color: 'bg-surface0',
+      bgColor: 'bg-surface',
+      textColor: 'text-primary',
     },
     {
       title: 'Total Products',
       value: stats.totalProducts.toString(),
       icon: Package,
-      color: 'bg-purple-500',
-      bgColor: 'bg-purple-50',
-      textColor: 'text-purple-600',
+      color: 'bg-accent',
+      bgColor: 'bg-surface',
+      textColor: 'text-accent',
     },
     {
       title: 'Total Users',
@@ -90,7 +90,7 @@ export default async function AdminDashboard() {
       icon: Users,
       color: 'bg-orange-500',
       bgColor: 'bg-orange-50',
-      textColor: 'text-orange-600',
+      textColor: 'text-accent',
     },
   ];
 
@@ -166,7 +166,7 @@ export default async function AdminDashboard() {
       <div className="bg-white rounded-lg shadow-sm p-6">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold text-gray-900">Recent Orders</h2>
-          <Link href="/admin/orders" className="text-blue-600 hover:text-blue-700 font-semibold text-sm">
+          <Link href="/admin/orders" className="text-primary hover:text-primary-light font-semibold text-sm">
             View All
           </Link>
         </div>
@@ -191,7 +191,7 @@ export default async function AdminDashboard() {
               </thead>
               <tbody>
                 {stats.recentOrders.map((order) => (
-                  <tr key={order.id} className="border-b border-gray-100 hover:bg-gray-50">
+                  <tr key={order.order_id} className="border-b border-gray-100 hover:bg-gray-50">
                     <td className="py-3 px-4 text-sm font-semibold text-gray-900">
                       {order.order_number}
                     </td>
@@ -202,7 +202,7 @@ export default async function AdminDashboard() {
                       {new Date(order.created_at).toLocaleDateString()}
                     </td>
                     <td className="py-3 px-4 text-sm font-semibold text-gray-900">
-                      ${Number(order.total).toFixed(2)}
+                      Rs {Number(order.total).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </td>
                     <td className="py-3 px-4">
                       <span
@@ -210,10 +210,10 @@ export default async function AdminDashboard() {
                           order.order_status === 'completed'
                             ? 'bg-green-100 text-green-700'
                             : order.order_status === 'shipped'
-                            ? 'bg-blue-100 text-blue-700'
+                            ? 'bg-gray-100 text-primary'
                             : order.order_status === 'processing'
                             ? 'bg-yellow-100 text-yellow-700'
-                            : 'bg-orange-100 text-orange-700'
+                            : 'bg-gray-100 text-orange-700'
                         }`}
                       >
                         {order.order_status}
@@ -221,8 +221,8 @@ export default async function AdminDashboard() {
                     </td>
                     <td className="py-3 px-4">
                       <Link
-                        href={`/admin/orders/${order.id}`}
-                        className="text-blue-600 hover:text-blue-700 text-sm font-semibold"
+                        href={`/admin/orders/${order.order_id}`}
+                        className="text-primary hover:text-primary-light text-sm font-semibold"
                       >
                         View
                       </Link>

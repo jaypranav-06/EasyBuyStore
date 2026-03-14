@@ -86,7 +86,7 @@ export default function AdminProductsPage() {
         </div>
         <Link
           href="/admin/products/new"
-          className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition flex items-center gap-2"
+          className="bg-gradient-to-r from-primary to-accent text-white px-6 py-3 rounded-lg font-semibold hover:from-primary-light hover:to-accent-light transition flex items-center gap-2"
         >
           <Plus className="w-5 h-5" />
           Add Product
@@ -103,13 +103,13 @@ export default function AdminProductsPage() {
               placeholder="Search products..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
             />
           </div>
           <select
             value={stockFilter}
             onChange={(e) => setStockFilter(e.target.value)}
-            className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
           >
             <option value="all">All Stock Levels</option>
             <option value="low">Low Stock (≤10)</option>
@@ -122,7 +122,7 @@ export default function AdminProductsPage() {
       <div className="bg-white rounded-lg shadow-sm overflow-hidden">
         {loading ? (
           <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
             <p className="mt-4 text-gray-600">Loading products...</p>
           </div>
         ) : filteredProducts.length === 0 ? (
@@ -131,7 +131,7 @@ export default function AdminProductsPage() {
             <p className="text-gray-600 mb-4">No products found</p>
             <Link
               href="/admin/products/new"
-              className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
+              className="inline-block bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary transition"
             >
               Add Your First Product
             </Link>
@@ -184,11 +184,11 @@ export default function AdminProductsPage() {
                     <td className="py-4 px-6">
                       <div>
                         <p className="font-semibold text-gray-900">
-                          ${Number(product.discount_price || product.price).toFixed(2)}
+                          Rs {Number(product.discount_price || product.price).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         </p>
                         {product.discount_price && (
                           <p className="text-sm text-gray-500 line-through">
-                            ${Number(product.price).toFixed(2)}
+                            Rs {Number(product.price).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                           </p>
                         )}
                       </div>
@@ -201,7 +201,7 @@ export default function AdminProductsPage() {
                               ? 'text-red-600'
                               : product.stock_quantity <= 10
                               ? 'text-yellow-600'
-                              : 'text-green-600'
+                              : 'text-success'
                           }`}
                         >
                           {product.stock_quantity}
@@ -226,7 +226,7 @@ export default function AdminProductsPage() {
                       <div className="flex gap-2">
                         <Link
                           href={`/admin/products/${product.product_id}`}
-                          className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition"
+                          className="p-2 text-primary hover:bg-surface rounded-lg transition"
                         >
                           <Edit className="w-5 h-5" />
                         </Link>
@@ -254,7 +254,7 @@ export default function AdminProductsPage() {
         </div>
         <div className="bg-white rounded-lg shadow-sm p-4">
           <p className="text-sm text-gray-600 mb-1">Active Products</p>
-          <p className="text-2xl font-bold text-green-600">
+          <p className="text-2xl font-bold text-success">
             {products.filter((p) => p.is_active).length}
           </p>
         </div>

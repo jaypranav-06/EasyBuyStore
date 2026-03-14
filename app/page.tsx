@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import prisma from '@/lib/db/prisma';
-import { Star, ShoppingBag } from 'lucide-react';
+import { ShoppingBag } from 'lucide-react';
+import ProductCardClient from '@/components/customer/ProductCardClient';
 
 async function getHomePageData() {
   const [featuredProducts, newArrivals, bestsellers, categories] = await Promise.all([
@@ -52,37 +53,78 @@ async function getHomePageData() {
     }),
   ]);
 
-  return { featuredProducts, newArrivals, bestsellers, categories };
+  // Serialize Decimal to number for client components
+  const serializeProduct = (product: any) => ({
+    ...product,
+    price: Number(product.price),
+    discount_price: product.discount_price ? Number(product.discount_price) : null,
+  });
+
+  return {
+    featuredProducts: featuredProducts.map(serializeProduct),
+    newArrivals: newArrivals.map(serializeProduct),
+    bestsellers: bestsellers.map(serializeProduct),
+    categories,
+  };
 }
 
 export default async function HomePage() {
   const { featuredProducts, newArrivals, bestsellers, categories } = await getHomePageData();
 
   return (
-    <div className="bg-gray-50">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div className="container mx-auto px-4 py-24 md:py-32">
-          <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Discover Your Perfect Style
-            </h1>
-            <p className="text-xl md:text-2xl mb-8 text-blue-100">
-              Explore our curated collection of premium fashion and accessories
-            </p>
-            <div className="flex gap-4">
-              <Link
-                href="/products"
-                className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
-              >
-                Shop Now
-              </Link>
-              <Link
-                href="/categories"
-                className="border-2 border-white px-8 py-3 rounded-lg font-semibold hover:bg-white/10 transition"
-              >
-                Browse Categories
-              </Link>
+    <div className="bg-white">
+      {/* Hero Section - Luxurious Design */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#2C2C2C] via-[#3A3A3A] to-[#2C2C2C]">
+        <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-5"></div>
+        <div className="container-custom relative">
+          <div className="grid md:grid-cols-2 gap-12 items-center min-h-[600px] py-16 md:py-0">
+            <div className="text-white space-y-6 animate-fade-in">
+              <div className="inline-block">
+                <span className="text-accent text-sm font-medium tracking-[0.3em] uppercase">
+                  New Collection 2026
+                </span>
+              </div>
+              <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+                Elegance in
+                <span className="block gradient-text">Every Thread</span>
+              </h1>
+              <p className="text-lg md:text-xl text-gray-300 max-w-lg leading-relaxed">
+                Discover timeless fashion pieces crafted with precision and passion. Elevate your wardrobe with our exclusive collection.
+              </p>
+              <div className="flex flex-wrap gap-4 pt-4">
+                <Link href="/products" className="btn-accent">
+                  Explore Collection
+                </Link>
+                <Link href="/categories" className="btn-outline !border-white !text-white hover:!bg-white hover:!text-primary">
+                  Shop by Category
+                </Link>
+              </div>
+              <div className="flex gap-8 pt-6 text-sm">
+                <div>
+                  <div className="text-accent text-2xl font-bold">500+</div>
+                  <div className="text-gray-400">Premium Products</div>
+                </div>
+                <div>
+                  <div className="text-accent text-2xl font-bold">50K+</div>
+                  <div className="text-gray-400">Happy Customers</div>
+                </div>
+                <div>
+                  <div className="text-accent text-2xl font-bold">24/7</div>
+                  <div className="text-gray-400">Customer Support</div>
+                </div>
+              </div>
+            </div>
+            <div className="relative hidden md:block animate-scale-in">
+              <div className="absolute -top-10 -right-10 w-64 h-64 bg-accent/20 rounded-full blur-3xl"></div>
+              <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-accent/20 rounded-full blur-3xl"></div>
+              <div className="relative aspect-square max-w-md ml-auto">
+                <div className="absolute inset-0 bg-gradient-to-br from-accent/30 to-transparent rounded-full blur-2xl"></div>
+                <div className="relative bg-white/5 backdrop-blur-sm rounded-3xl p-8 border border-white/10">
+                  <div className="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-accent/20 to-transparent flex items-center justify-center">
+                    <ShoppingBag className="w-32 h-32 text-accent/60" />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -90,28 +132,38 @@ export default async function HomePage() {
 
       {/* Categories Section */}
       {categories.length > 0 && (
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12">Shop by Category</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+        <section className="section-padding bg-surface">
+          <div className="container-custom">
+            <div className="text-center mb-12 space-y-2">
+              <span className="text-accent text-sm font-medium tracking-[0.3em] uppercase">
+                Collections
+              </span>
+              <h2 className="text-4xl md:text-5xl font-bold text-primary">
+                Shop by Category
+              </h2>
+              <p className="text-text-secondary mt-4 max-w-2xl mx-auto">
+                Explore our carefully curated collections designed to complement your lifestyle
+              </p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
               {categories.map((category) => (
                 <Link
                   key={category.category_id}
                   href={`/products?category=${category.category_id}`}
                   className="group"
                 >
-                  <div className="bg-gray-100 rounded-lg p-6 text-center hover:bg-blue-50 transition">
+                  <div className="card p-6 text-center transform transition-all duration-300 hover:scale-105 border border-transparent hover:border-accent/20">
                     {category.image_url && (
-                      <div className="mb-4 relative h-24 w-24 mx-auto">
+                      <div className="mb-4 relative h-24 w-24 mx-auto overflow-hidden rounded-full bg-white shadow-md">
                         <Image
                           src={category.image_url}
                           alt={category.category_name}
                           fill
-                          className="object-cover rounded-full"
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
                         />
                       </div>
                     )}
-                    <h3 className="font-semibold text-gray-800 group-hover:text-blue-600">
+                    <h3 className="font-semibold text-primary group-hover:text-accent transition-colors duration-300">
                       {category.category_name}
                     </h3>
                   </div>
@@ -124,17 +176,22 @@ export default async function HomePage() {
 
       {/* Featured Products */}
       {featuredProducts.length > 0 && (
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="flex justify-between items-center mb-12">
-              <h2 className="text-3xl font-bold">Featured Products</h2>
-              <Link href="/products?featured=true" className="text-blue-600 hover:underline">
-                View All
+        <section className="section-padding bg-white">
+          <div className="container-custom">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
+              <div>
+                <span className="text-accent text-sm font-medium tracking-[0.3em] uppercase block mb-2">
+                  Handpicked
+                </span>
+                <h2 className="text-4xl font-bold text-primary">Featured Products</h2>
+              </div>
+              <Link href="/products?featured=true" className="text-accent hover:text-accent-light transition-colors font-medium flex items-center gap-2">
+                View All Collection →
               </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {featuredProducts.map((product) => (
-                <ProductCard key={product.product_id} product={product} />
+                <ProductCardClient key={product.product_id} product={product} />
               ))}
             </div>
           </div>
@@ -143,17 +200,22 @@ export default async function HomePage() {
 
       {/* New Arrivals */}
       {newArrivals.length > 0 && (
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="flex justify-between items-center mb-12">
-              <h2 className="text-3xl font-bold">New Arrivals</h2>
-              <Link href="/products?new=true" className="text-blue-600 hover:underline">
-                View All
+        <section className="section-padding bg-surface">
+          <div className="container-custom">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
+              <div>
+                <span className="text-accent text-sm font-medium tracking-[0.3em] uppercase block mb-2">
+                  Just In
+                </span>
+                <h2 className="text-4xl font-bold text-primary">New Arrivals</h2>
+              </div>
+              <Link href="/products?new=true" className="text-accent hover:text-accent-light transition-colors font-medium flex items-center gap-2">
+                Explore Latest →
               </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {newArrivals.map((product) => (
-                <ProductCard key={product.product_id} product={product} />
+                <ProductCardClient key={product.product_id} product={product} />
               ))}
             </div>
           </div>
@@ -162,17 +224,22 @@ export default async function HomePage() {
 
       {/* Bestsellers */}
       {bestsellers.length > 0 && (
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="flex justify-between items-center mb-12">
-              <h2 className="text-3xl font-bold">Bestsellers</h2>
-              <Link href="/products?bestseller=true" className="text-blue-600 hover:underline">
-                View All
+        <section className="section-padding bg-white">
+          <div className="container-custom">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
+              <div>
+                <span className="text-accent text-sm font-medium tracking-[0.3em] uppercase block mb-2">
+                  Customer Favorites
+                </span>
+                <h2 className="text-4xl font-bold text-primary">Bestsellers</h2>
+              </div>
+              <Link href="/products?bestseller=true" className="text-accent hover:text-accent-light transition-colors font-medium flex items-center gap-2">
+                Shop Bestsellers →
               </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {bestsellers.map((product) => (
-                <ProductCard key={product.product_id} product={product} />
+                <ProductCardClient key={product.product_id} product={product} />
               ))}
             </div>
           </div>
@@ -180,87 +247,36 @@ export default async function HomePage() {
       )}
 
       {/* Newsletter Section */}
-      <section className="py-16 bg-blue-600 text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
-          <p className="text-xl mb-8 text-blue-100">
-            Subscribe to our newsletter for exclusive offers and updates
-          </p>
-          <form className="max-w-md mx-auto flex gap-4">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-lg text-gray-800"
-            />
-            <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
-              Subscribe
-            </button>
-          </form>
+      <section className="relative overflow-hidden bg-gradient-to-r from-primary via-primary-light to-primary text-white section-padding">
+        <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-5"></div>
+        <div className="container-custom relative">
+          <div className="max-w-3xl mx-auto text-center space-y-6">
+            <span className="text-accent text-sm font-medium tracking-[0.3em] uppercase">
+              Stay Connected
+            </span>
+            <h2 className="text-4xl md:text-5xl font-bold">
+              Join the EasyBuyStore Community
+            </h2>
+            <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              Subscribe to receive exclusive offers, style tips, and early access to new collections
+            </p>
+            <form className="max-w-md mx-auto flex flex-col sm:flex-row gap-4 mt-8">
+              <input
+                type="email"
+                placeholder="Enter your email address"
+                className="input flex-1 text-primary"
+                required
+              />
+              <button type="submit" className="btn-accent whitespace-nowrap">
+                Subscribe Now
+              </button>
+            </form>
+            <p className="text-sm text-gray-400 mt-4">
+              By subscribing, you agree to our Privacy Policy and consent to receive updates
+            </p>
+          </div>
         </div>
       </section>
     </div>
-  );
-}
-
-function ProductCard({ product }: { product: any }) {
-  const price = Number(product.discount_price || product.price);
-  const originalPrice = product.discount_price ? Number(product.price) : null;
-
-  return (
-    <Link href={`/products/${product.product_id}`} className="group">
-      <div className="bg-white rounded-lg shadow-sm hover:shadow-lg transition overflow-hidden">
-        <div className="relative aspect-square">
-          {product.image_url ? (
-            <Image
-              src={product.image_url}
-              alt={product.product_name}
-              fill
-              className="object-cover group-hover:scale-105 transition duration-300"
-            />
-          ) : (
-            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-              <ShoppingBag className="w-16 h-16 text-gray-400" />
-            </div>
-          )}
-          {product.is_new && (
-            <span className="absolute top-2 left-2 bg-green-500 text-white text-xs px-2 py-1 rounded">
-              New
-            </span>
-          )}
-          {product.discount_price && (
-            <span className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
-              Sale
-            </span>
-          )}
-        </div>
-        <div className="p-4">
-          <p className="text-sm text-gray-500 mb-1">{product.category?.category_name}</p>
-          <h3 className="font-semibold text-gray-800 mb-2 line-clamp-2">
-            {product.product_name}
-          </h3>
-          <div className="flex items-center gap-2 mb-2">
-            <div className="flex text-yellow-400">
-              {[...Array(5)].map((_, i) => (
-                <Star
-                  key={i}
-                  className="w-4 h-4"
-                  fill={i < 4 ? 'currentColor' : 'none'}
-                />
-              ))}
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-lg font-bold text-gray-800">
-              ${price.toFixed(2)}
-            </span>
-            {originalPrice && (
-              <span className="text-sm text-gray-500 line-through">
-                ${originalPrice.toFixed(2)}
-              </span>
-            )}
-          </div>
-        </div>
-      </div>
-    </Link>
   );
 }

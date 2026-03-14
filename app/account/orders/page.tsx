@@ -43,7 +43,7 @@ export default async function OrdersPage() {
         <div className="mb-8">
           <Link
             href="/account"
-            className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-4"
+            className="inline-flex items-center text-primary hover:text-primary-light mb-4"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Account
@@ -60,7 +60,7 @@ export default async function OrdersPage() {
             <p className="text-gray-600 mb-6">Start shopping to see your orders here!</p>
             <Link
               href="/products"
-              className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition"
+              className="inline-block bg-gradient-to-r from-primary to-accent text-white px-8 py-3 rounded-lg font-semibold hover:from-primary-light hover:to-accent-light transition"
             >
               Browse Products
             </Link>
@@ -92,7 +92,7 @@ export default async function OrdersPage() {
                       <div>
                         <p className="text-xs text-gray-600 mb-1">Total</p>
                         <p className="font-semibold text-gray-900 text-sm">
-                          ${Number(order.total).toFixed(2)}
+                          Rs {Number(order.total).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         </p>
                       </div>
                       <div>
@@ -102,11 +102,11 @@ export default async function OrdersPage() {
                             order.order_status === 'completed'
                               ? 'bg-green-100 text-green-700'
                               : order.order_status === 'shipped'
-                              ? 'bg-blue-100 text-blue-700'
+                              ? 'bg-gray-100 text-primary'
                               : order.order_status === 'processing'
                               ? 'bg-yellow-100 text-yellow-700'
                               : order.order_status === 'pending'
-                              ? 'bg-orange-100 text-orange-700'
+                              ? 'bg-gray-100 text-orange-700'
                               : 'bg-gray-100 text-gray-700'
                           }`}
                         >
@@ -139,17 +139,17 @@ export default async function OrdersPage() {
                         <div className="flex-1">
                           <Link
                             href={`/products/${item.product_id}`}
-                            className="font-semibold text-gray-900 hover:text-blue-600"
+                            className="font-semibold text-gray-900 hover:text-primary"
                           >
                             {item.product?.product_name || 'Product'}
                           </Link>
                           <p className="text-sm text-gray-600 mt-1">
-                            Quantity: {item.quantity} × ${Number(item.price).toFixed(2)}
+                            Quantity: {item.quantity} × Rs {Number(item.price).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                           </p>
                         </div>
                         <div className="text-right">
                           <p className="font-bold text-gray-900">
-                            ${Number(item.subtotal).toFixed(2)}
+                            Rs {Number(item.subtotal).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                           </p>
                         </div>
                       </div>
@@ -176,7 +176,7 @@ export default async function OrdersPage() {
                       {order.order_status === 'completed' && (
                         <Link
                           href={`/products`}
-                          className="px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition"
+                          className="px-6 py-2 bg-primary text-white rounded-lg font-semibold hover:bg-primary transition"
                         >
                           Buy Again
                         </Link>

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   LayoutDashboard,
   Package,
@@ -11,22 +11,47 @@ import {
   BarChart3,
   Settings,
   Home,
-  LogOut
+  LogOut,
+  Tag,
+  UserCog,
 } from 'lucide-react';
-import { signOut } from 'next-auth/react';
 
-export default function AdminSidebar() {
+interface AdminUser {
+  id: number;
+  email: string;
+  username: string;
+  role: string;
+  type: 'admin';
+}
+
+interface AdminSidebarProps {
+  admin: AdminUser;
+}
+
+export default function AdminSidebar({ admin }: AdminSidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
 
   const navItems = [
     { href: '/admin', label: 'Dashboard', icon: LayoutDashboard },
     { href: '/admin/products', label: 'Products', icon: Package },
+    { href: '/admin/categories', label: 'Categories', icon: Tag },
     { href: '/admin/orders', label: 'Orders', icon: ShoppingCart },
-    { href: '/admin/users', label: 'Users', icon: Users },
-    { href: '/admin/inquiries', label: 'Inquiries', icon: MessageSquare },
+    { href: '/admin/customers', label: 'Customers', icon: Users },
     { href: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
+    { href: '/admin/staff', label: 'Staff', icon: UserCog, adminOnly: true },
     { href: '/admin/settings', label: 'Settings', icon: Settings },
   ];
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/admin/logout', { method: 'POST' });
+      router.push('/admin/login');
+      router.refresh();
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
 
   const isActive = (href: string) => {
     if (href === '/admin') {
@@ -41,11 +66,11 @@ export default function AdminSidebar() {
         {/* Logo */}
         <div className="p-6 border-b border-gray-200">
           <Link href="/admin" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">VV</span>
+            <div className="w-10 h-10 bg-gradient-to-r from-emerald-500 to-blue-600 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-lg">EB</span>
             </div>
             <div>
-              <h2 className="text-lg font-bold text-gray-900">Velvet Vogue</h2>
+              <h2 className="text-lg font-bold text-gray-900">EasyBuyStore</h2>
               <p className="text-xs text-gray-600">Admin Panel</p>
             </div>
           </Link>
@@ -54,6 +79,11 @@ export default function AdminSidebar() {
         {/* Navigation */}
         <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
           {navItems.map((item) => {
+            // Hide admin-only items from non-admins
+            if (item.adminOnly && admin.role !== 'admin') {
+              return null;
+            }
+
             const Icon = item.icon;
             const active = isActive(item.href);
             return (
@@ -74,7 +104,14 @@ export default function AdminSidebar() {
         </nav>
 
         {/* Footer Actions */}
-        <div className="p-4 border-t border-gray-200 space-y-1">
+        <div className="p-4 border-t border-gray-200 space-y-2">
+          {/* Admin Info */}
+          <div className="px-4 py-2 bg-gray-50 rounded-lg">
+            <p className="text-xs text-gray-600">Signed in as</p>
+            <p className="text-sm font-semibold text-gray-900">{admin.username}</p>
+            <p className="text-xs text-gray-600">{admin.email}</p>
+          </div>
+
           <Link
             href="/"
             className="flex items-center gap-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition"
@@ -83,7 +120,7 @@ export default function AdminSidebar() {
             Back to Store
           </Link>
           <button
-            onClick={() => signOut({ callbackUrl: '/' })}
+            onClick={handleLogout}
             className="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition"
           >
             <LogOut className="w-5 h-5" />

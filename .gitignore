@@ -31,7 +31,7 @@ yarn-error.log*
 
 # Typescript
 *.tsbuildinfo
-next-env.d.ts
+# next-env.d.ts is auto-generated but should be committed
 
 # Prisma
 /prisma/migrations

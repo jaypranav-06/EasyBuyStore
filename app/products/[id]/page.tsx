@@ -4,6 +4,7 @@ import Link from 'next/link';
 import prisma from '@/lib/db/prisma';
 import { Star, ShoppingBag, Truck, Shield, ArrowLeft } from 'lucide-react';
 import AddToCartButton from '@/components/customer/AddToCartButton';
+import AddToWishlistButton from '@/components/customer/AddToWishlistButton';
 
 async function getProduct(id: string) {
   const productId = parseInt(id);
@@ -36,8 +37,9 @@ async function getProduct(id: string) {
   return product;
 }
 
-export default async function ProductDetailPage({ params }: { params: { id: string } }) {
-  const product = await getProduct(params.id);
+export default async function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const product = await getProduct(id);
 
   if (!product) {
     notFound();
@@ -54,7 +56,7 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
     <div className="bg-gray-50 min-h-screen">
       <div className="container mx-auto px-4 py-8">
         {/* Back Button */}
-        <Link href="/products" className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-6">
+        <Link href="/products" className="inline-flex items-center text-primary hover:text-primary-light mb-6">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Products
         </Link>
@@ -85,7 +87,7 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
 
             {/* Product Info */}
             <div>
-              <p className="text-sm text-blue-600 mb-2">{product.category?.category_name}</p>
+              <p className="text-sm text-primary mb-2">{product.category?.category_name}</p>
               <h1 className="text-3xl font-bold text-gray-900 mb-4">{product.product_name}</h1>
 
               {/* Rating */}
@@ -107,10 +109,10 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
               {/* Price */}
               <div className="mb-6">
                 <div className="flex items-baseline gap-3">
-                  <span className="text-4xl font-bold text-gray-900">${price.toFixed(2)}</span>
+                  <span className="text-4xl font-bold text-gray-900">Rs {price.toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                   {originalPrice && (
                     <span className="text-xl text-gray-500 line-through">
-                      ${originalPrice.toFixed(2)}
+                      Rs {originalPrice.toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </span>
                   )}
                 </div>
@@ -119,7 +121,7 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
               {/* Stock Status */}
               <div className="mb-6">
                 {product.stock_quantity > 0 ? (
-                  <span className="text-green-600 font-semibold">In Stock ({product.stock_quantity} available)</span>
+                  <span className="text-success font-semibold">In Stock ({product.stock_quantity} available)</span>
                 ) : (
                   <span className="text-red-600 font-semibold">Out of Stock</span>
                 )}
@@ -133,27 +135,37 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
                 </div>
               )}
 
-              {/* Add to Cart */}
-              <AddToCartButton product={product} />
+              {/* Add to Cart & Wishlist */}
+              <div className="flex gap-3">
+                <AddToCartButton product={{
+                  ...product,
+                  price: Number(product.price),
+                  discount_price: product.discount_price ? Number(product.discount_price) : null,
+                }} className="flex-1" />
+                <AddToWishlistButton
+                  productId={product.product_id}
+                  className="p-3 border border-gray-300 rounded-lg hover:border-red-500"
+                />
+              </div>
 
               {/* Features */}
               <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="flex items-center gap-3 text-gray-600">
-                  <Truck className="w-6 h-6 text-blue-600" />
+                  <Truck className="w-6 h-6 text-primary" />
                   <div className="text-sm">
                     <p className="font-semibold">Free Shipping</p>
-                    <p className="text-gray-500">On orders over $50</p>
+                    <p className="text-gray-500">On orders over Rs 10,000</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 text-gray-600">
-                  <Shield className="w-6 h-6 text-blue-600" />
+                  <Shield className="w-6 h-6 text-primary" />
                   <div className="text-sm">
                     <p className="font-semibold">Secure Payment</p>
                     <p className="text-gray-500">100% secure</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 text-gray-600">
-                  <Star className="w-6 h-6 text-blue-600" />
+                  <Star className="w-6 h-6 text-primary" />
                   <div className="text-sm">
                     <p className="font-semibold">Quality Guarantee</p>
                     <p className="text-gray-500">Premium products</p>

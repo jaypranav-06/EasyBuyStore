@@ -1,4 +1,4 @@
-# Velvet Vogue E-Commerce - Next.js Migration
+# EasyBuyStore E-Commerce - Next.js Migration
 
 ![Status](https://img.shields.io/badge/Status-95%25%20Complete-brightgreen)
 ![Next.js](https://img.shields.io/badge/Next.js-16.1.6-black)
@@ -6,7 +6,7 @@
 
 ## Overview
 
-This is the modern Next.js migration of the Velvet Vogue e-commerce website, originally built with PHP and MySQL for a university project. The migration is **95% complete** with all core features implemented including customer pages, authentication, shopping cart, checkout, order management, and admin dashboard.
+This is the modern Next.js migration of the EasyBuyStore e-commerce website, originally built with PHP and MySQL for a university project. The migration is **95% complete** with all core features implemented including customer pages, authentication, shopping cart, checkout, order management, and admin dashboard.
 
 ## Original PHP Application Features
 
@@ -121,48 +121,64 @@ The application uses the existing MySQL database with the following tables:
 - `promo_codes` - Promotional codes
 - `reviews` - Product reviews
 
+## 📚 Documentation
+
+Comprehensive setup and usage guides are available in the `docs/` folder:
+
+- **[Quick Start Guide](docs/QUICK_START.md)** - Get up and running in 5 minutes
+- **[Setup Guide](docs/SETUP_GUIDE.md)** - Detailed installation and configuration instructions
+- **[Admin Credentials](docs/ADMIN_CREDENTIALS.md)** - Default admin login information
+- **[Migration Guide](docs/MIGRATION.md)** - PHP to Next.js migration details
+
 ## Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
-- MySQL database (existing from PHP project)
+- Node.js 18+
+- MySQL database 8.0+
 - npm or yarn
 
-### Installation
+### Quick Installation
 
 ```bash
-# Install dependencies
+# 1. Install dependencies
 npm install
 
-# Setup environment variables
-cp .env.local.example .env.local
-# Edit .env.local with your database credentials
+# 2. Create database
+mysql -u root -p
+CREATE DATABASE easybuystore;
 
-# Initialize Prisma
+# 3. Setup environment variables
+cp .env.example .env
+# Edit .env with your database credentials
+
+# 4. Initialize Prisma
 npx prisma generate
-npx prisma db pull  # Pull existing schema from database
+npx prisma db push
 
-# Run development server
+# 5. Run development server
 npm run dev
 ```
 
 Visit [http://localhost:3000](http://localhost:3000)
 
+**For detailed setup instructions, see [docs/SETUP_GUIDE.md](docs/SETUP_GUIDE.md)**
+
 ## Environment Variables
 
 ```env
-DATABASE_URL="mysql://root:@localhost:3306/velvet_vogue_ecommerce_web"
+DATABASE_URL="mysql://root:password@localhost:3306/easybuystore"
 NEXTAUTH_URL="http://localhost:3000"
 NEXTAUTH_SECRET="your-secret-key"
 NEXT_PUBLIC_PAYPAL_CLIENT_ID="your-paypal-client-id"
 PAYPAL_CLIENT_SECRET="your-paypal-secret"
-PAYPAL_ENVIRONMENT="sandbox"
 ```
+
+See `.env.example` for a complete template.
 
 ## Project Structure
 
 ```
-velvet-vogue-nextjs/
+easybuystore-nextjs/
 ├── app/
 │   ├── (customer)/         # Customer-facing pages
 │   ├── (admin)/           # Admin dashboard pages

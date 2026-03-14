@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@/lib/auth/auth';
 import prisma from '@/lib/db/prisma';
 
-// GET /api/orders/[id] - Get single order by ID
+// GET /api/orders/[orderId] - Get single order by ID
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { orderId: string } }
 ) {
   try {
     const session = await auth();
@@ -18,7 +18,7 @@ export async function GET(
     }
 
     const userId = parseInt(session.user.id);
-    const orderId = parseInt(params.id);
+    const orderId = parseInt(params.orderId);
 
     if (isNaN(orderId)) {
       return NextResponse.json(

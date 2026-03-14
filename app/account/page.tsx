@@ -77,7 +77,7 @@ export default async function AccountPage() {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-sm p-6">
               <div className="flex items-center gap-4 mb-6 pb-6 border-b">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white text-2xl font-bold">
                   {user.first_name[0]}{user.last_name[0]}
                 </div>
                 <div>
@@ -91,7 +91,7 @@ export default async function AccountPage() {
               <nav className="space-y-2">
                 <Link
                   href="/account"
-                  className="flex items-center gap-3 px-4 py-3 bg-blue-50 text-blue-600 rounded-lg font-semibold"
+                  className="flex items-center gap-3 px-4 py-3 bg-surface text-primary rounded-lg font-semibold"
                 >
                   <User className="w-5 h-5" />
                   Account Overview
@@ -131,8 +131,8 @@ export default async function AccountPage() {
                     <p className="text-gray-600 text-sm mb-1">Total Orders</p>
                     <p className="text-3xl font-bold text-gray-900">{ordersCount}</p>
                   </div>
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Package className="w-6 h-6 text-blue-600" />
+                  <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                    <Package className="w-6 h-6 text-primary" />
                   </div>
                 </div>
               </div>
@@ -148,8 +148,8 @@ export default async function AccountPage() {
                       })}
                     </p>
                   </div>
-                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                    <User className="w-6 h-6 text-purple-600" />
+                  <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                    <User className="w-6 h-6 text-accent" />
                   </div>
                 </div>
               </div>
@@ -161,7 +161,7 @@ export default async function AccountPage() {
                 <h2 className="text-xl font-bold text-gray-900">Account Information</h2>
                 <Link
                   href="/account/settings"
-                  className="text-blue-600 hover:text-blue-700 text-sm font-semibold"
+                  className="text-primary hover:text-primary-light text-sm font-semibold"
                 >
                   Edit
                 </Link>
@@ -199,7 +199,7 @@ export default async function AccountPage() {
                 <h2 className="text-xl font-bold text-gray-900">Recent Orders</h2>
                 <Link
                   href="/account/orders"
-                  className="text-blue-600 hover:text-blue-700 text-sm font-semibold"
+                  className="text-primary hover:text-primary-light text-sm font-semibold"
                 >
                   View All
                 </Link>
@@ -211,7 +211,7 @@ export default async function AccountPage() {
                   <p className="text-gray-600 mb-4">No orders yet</p>
                   <Link
                     href="/products"
-                    className="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
+                    className="inline-block bg-primary text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary transition"
                   >
                     Start Shopping
                   </Link>
@@ -219,7 +219,7 @@ export default async function AccountPage() {
               ) : (
                 <div className="space-y-4">
                   {recentOrders.map((order) => (
-                    <div key={order.id} className="border rounded-lg p-4 hover:border-blue-300 transition">
+                    <div key={order.id} className="border rounded-lg p-4 hover:border-accent transition">
                       <div className="flex justify-between items-start mb-3">
                         <div>
                           <p className="font-semibold text-gray-900">Order #{order.order_number}</p>
@@ -236,7 +236,7 @@ export default async function AccountPage() {
                             order.order_status === 'completed'
                               ? 'bg-green-100 text-green-700'
                               : order.order_status === 'shipped'
-                              ? 'bg-blue-100 text-blue-700'
+                              ? 'bg-gray-100 text-primary'
                               : order.order_status === 'processing'
                               ? 'bg-yellow-100 text-yellow-700'
                               : 'bg-gray-100 text-gray-700'
@@ -250,10 +250,10 @@ export default async function AccountPage() {
                           {order.order_items.length} item{order.order_items.length !== 1 ? 's' : ''}
                         </p>
                         <div className="flex items-center gap-3">
-                          <p className="font-bold text-gray-900">${Number(order.total).toFixed(2)}</p>
+                          <p className="font-bold text-gray-900">Rs {Number(order.total).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                           <Link
                             href={`/account/orders/${order.id}`}
-                            className="text-blue-600 hover:text-blue-700 text-sm font-semibold"
+                            className="text-primary hover:text-primary-light text-sm font-semibold"
                           >
                             View Details
                           </Link>

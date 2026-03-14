@@ -7,14 +7,43 @@ export const authConfig = {
     error: '/error',
   },
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
+    async jwt({ token, user }) {
+      // This callback is shared between API and middleware
+      if (user) {
+        token.role = user.role;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      // Add role to session user
+      if (session.user && token.role) {
+        session.user.role = token.role as string;
+      }
+      return session;
+    },
+    async authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isOnAdminPanel = nextUrl.pathname.startsWith('/admin');
       const isOnAccountPage = nextUrl.pathname.startsWith('/account');
 
+      // In NextAuth v5, auth.user should have the role from the session callback
+      const userRole = auth?.user?.role;
+
+      console.log('🔒 Authorization check:', {
+        path: nextUrl.pathname,
+        isLoggedIn,
+        userRole,
+        fullUser: auth?.user,
+        isOnAdminPanel,
+      });
+
       if (isOnAdminPanel) {
-        if (isLoggedIn && auth.user.role === 'admin') return true;
-        return false; // Redirect to login page
+        if (isLoggedIn && userRole === 'admin') {
+          console.log('✅ Admin access granted');
+          return true;
+        }
+        console.log('❌ Admin access denied');
+        return false; // Redirect to sign in page
       }
 
       if (isOnAccountPage) {

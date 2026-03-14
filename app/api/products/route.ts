@@ -15,13 +15,15 @@ export async function GET(request: NextRequest) {
 
     const where: any = {
       is_active: true,
+      stock_quantity: { gt: 0 },
     };
 
-    // Add filters
+    // Add category filter
     if (category) {
       where.category_id = parseInt(category);
     }
 
+    // Add product type filters - these should be AND conditions with category
     if (featured === 'true') {
       where.is_featured = true;
     }
@@ -34,10 +36,11 @@ export async function GET(request: NextRequest) {
       where.is_bestseller = true;
     }
 
+    // Add search filter
     if (search) {
       where.OR = [
-        { product_name: { contains: search } },
-        { description: { contains: search } },
+        { product_name: { contains: search, mode: 'insensitive' } },
+        { description: { contains: search, mode: 'insensitive' } },
       ];
     }
 

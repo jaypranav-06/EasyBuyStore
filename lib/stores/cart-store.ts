@@ -75,7 +75,7 @@ export const useCartStore = create<CartStore>()(
       },
     }),
     {
-      name: 'velvet-vogue-cart',
+      name: 'easybuystore-cart',
       storage: createJSONStorage(() => localStorage),
     }
   )

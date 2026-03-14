@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { ShoppingCart, Plus, Minus } from 'lucide-react';
 import { useCartStore } from '@/lib/stores/cart-store';
 
-export default function AddToCartButton({ product }: { product: any }) {
+export default function AddToCartButton({ product, className = '' }: { product: any; className?: string }) {
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const addItem = useCartStore((state) => state.addItem);
@@ -52,7 +52,7 @@ export default function AddToCartButton({ product }: { product: any }) {
       <button
         onClick={handleAddToCart}
         disabled={product.stock_quantity === 0 || added}
-        className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className={`w-full bg-gradient-to-r from-primary to-accent text-white py-4 rounded-lg font-semibold hover:from-primary-light hover:to-accent-light transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 ${className}`}
       >
         <ShoppingCart className="w-5 h-5" />
         {added ? 'Added to Cart!' : 'Add to Cart'}

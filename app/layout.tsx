@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import { Inter } from 'next/font/google';
 import "./globals.css";
-import Navbar from '@/components/customer/Navbar';
-import Footer from '@/components/customer/Footer';
+import ConditionalLayout from '@/components/ConditionalLayout';
 import { Providers } from '@/components/Providers';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Velvet Vogue - Elegance in Every Thread",
-  description: "Premium fashion e-commerce store",
+  title: "EasyBuyStore - Shop Smart, Shop Easy",
+  description: "Your destination for easy online shopping in Sri Lanka. Discover great products at amazing prices with fast delivery.",
 };
 
 export default function RootLayout({
@@ -18,12 +17,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`antialiased ${inter.className}`}>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+      </head>
+      <body className={`antialiased ${inter.className}`} suppressHydrationWarning>
         <Providers>
-          <Navbar />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
+          <ConditionalLayout>{children}</ConditionalLayout>
         </Providers>
       </body>
     </html>

@@ -1,4 +1,4 @@
-# Velvet Vogue - PHP to Next.js Migration
+# EasyBuyStore - PHP to Next.js Migration
 
 ## Migration Status: IN PROGRESS (Day 1/28)
 
@@ -7,7 +7,7 @@
 ---
 
 ## Overview
-Migrating the Velvet Vogue e-commerce website from PHP/XAMPP to Next.js 14 with TypeScript.
+Migrating the EasyBuyStore e-commerce website from PHP/XAMPP to Next.js 14 with TypeScript.
 
 ### Source
 - **Location:** `/Users/jay/Documents/Jay/velvet_vogue_Ecommerce_WebPage`
@@ -15,7 +15,7 @@ Migrating the Velvet Vogue e-commerce website from PHP/XAMPP to Next.js 14 with 
 - **Database:** `velvet_vogue_ecommerce_web` (MySQL on localhost)
 
 ### Target
-- **Location:** `/Users/jay/Documents/Jay/velvet-vogue-nextjs`
+- **Location:** `/Users/jay/Documents/Jay/easybuystore-nextjs`
 - **Tech Stack:** Next.js 14, TypeScript, Tailwind CSS, Prisma, NextAuth.js
 - **Database:** Same MySQL database (no migration needed)
 

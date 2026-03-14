@@ -5,10 +5,10 @@ export default function AboutPage() {
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 px-4">
+      <div className="bg-gradient-to-r from-primary to-accent text-white py-20 px-4">
         <div className="container mx-auto text-center">
-          <h1 className="text-5xl font-bold mb-4">About Velvet Vogue</h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+          <h1 className="text-5xl font-bold mb-4">About EasyBuyStore</h1>
+          <p className="text-xl text-gray-100 max-w-3xl mx-auto">
             Your premier destination for quality fashion and lifestyle products
           </p>
         </div>
@@ -20,7 +20,7 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Our Story</h2>
           <div className="bg-white rounded-lg shadow-sm p-8 space-y-4 text-gray-600 leading-relaxed">
             <p>
-              Velvet Vogue was founded with a simple mission: to bring high-quality, stylish products
+              EasyBuyStore was founded with a simple mission: to bring high-quality, stylish products
               to customers around the world. What started as a small university project has grown into
               a passionate endeavor to create an exceptional online shopping experience.
             </p>
@@ -42,8 +42,8 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Our Values</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="bg-white rounded-lg shadow-sm p-6 text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="w-8 h-8 text-blue-600" />
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Award className="w-8 h-8 text-primary" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Quality First</h3>
               <p className="text-gray-600">
@@ -52,8 +52,8 @@ export default function AboutPage() {
             </div>
 
             <div className="bg-white rounded-lg shadow-sm p-6 text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Heart className="w-8 h-8 text-purple-600" />
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Heart className="w-8 h-8 text-accent" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Customer Care</h3>
               <p className="text-gray-600">
@@ -63,7 +63,7 @@ export default function AboutPage() {
 
             <div className="bg-white rounded-lg shadow-sm p-6 text-center">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Target className="w-8 h-8 text-green-600" />
+                <Target className="w-8 h-8 text-success" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Innovation</h3>
               <p className="text-gray-600">
@@ -72,8 +72,8 @@ export default function AboutPage() {
             </div>
 
             <div className="bg-white rounded-lg shadow-sm p-6 text-center">
-              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="w-8 h-8 text-orange-600" />
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="w-8 h-8 text-accent" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Community</h3>
               <p className="text-gray-600">
@@ -88,8 +88,8 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Why Choose Us</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <div className="flex gap-4">
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                <ShoppingBag className="w-6 h-6 text-blue-600" />
+              <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <ShoppingBag className="w-6 h-6 text-primary" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Wide Selection</h3>
@@ -101,20 +101,20 @@ export default function AboutPage() {
             </div>
 
             <div className="flex gap-4">
-              <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                <Truck className="w-6 h-6 text-purple-600" />
+              <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Truck className="w-6 h-6 text-accent" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Fast Shipping</h3>
                 <p className="text-gray-600">
-                  Free shipping on orders over $50. Get your items delivered quickly and safely.
+                  Free shipping on orders over Rs 10,000. Get your items delivered quickly and safely.
                 </p>
               </div>
             </div>
 
             <div className="flex gap-4">
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                <Shield className="w-6 h-6 text-green-600" />
+                <Shield className="w-6 h-6 text-success" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Secure Payment</h3>
@@ -126,8 +126,8 @@ export default function AboutPage() {
             </div>
 
             <div className="flex gap-4">
-              <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                <Star className="w-6 h-6 text-orange-600" />
+              <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <Star className="w-6 h-6 text-accent" />
               </div>
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Top Rated</h3>
@@ -140,23 +140,23 @@ export default function AboutPage() {
         </div>
 
         {/* Stats */}
-        <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-12 text-white mb-20">
+        <div className="bg-gradient-to-r from-primary to-accent rounded-2xl p-12 text-white mb-20">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             <div>
               <p className="text-5xl font-bold mb-2">10k+</p>
-              <p className="text-blue-100">Happy Customers</p>
+              <p className="text-gray-100">Happy Customers</p>
             </div>
             <div>
               <p className="text-5xl font-bold mb-2">5k+</p>
-              <p className="text-blue-100">Products</p>
+              <p className="text-gray-100">Products</p>
             </div>
             <div>
               <p className="text-5xl font-bold mb-2">50+</p>
-              <p className="text-blue-100">Categories</p>
+              <p className="text-gray-100">Categories</p>
             </div>
             <div>
               <p className="text-5xl font-bold mb-2">4.8</p>
-              <p className="text-blue-100">Average Rating</p>
+              <p className="text-gray-100">Average Rating</p>
             </div>
           </div>
         </div>
@@ -170,7 +170,7 @@ export default function AboutPage() {
           <div className="flex gap-4 justify-center">
             <Link
               href="/products"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition"
+              className="bg-gradient-to-r from-primary to-accent text-white px-8 py-4 rounded-lg font-semibold hover:from-primary-light hover:to-accent-light transition"
             >
               Shop Now
             </Link>

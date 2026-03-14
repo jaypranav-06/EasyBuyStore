@@ -146,7 +146,7 @@ export default function CheckoutPage() {
   if (status === 'loading') {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     );
   }
@@ -164,7 +164,7 @@ export default function CheckoutPage() {
             </p>
 
             {orderId && (
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+              <div className="bg-surface border border-primary rounded-lg p-4 mb-6">
                 <p className="text-sm text-gray-600 mb-1">Order Number</p>
                 <p className="text-lg font-bold text-gray-900">{orderId}</p>
               </div>
@@ -182,7 +182,7 @@ export default function CheckoutPage() {
             <div className="flex gap-4 justify-center mt-8">
               <button
                 onClick={() => router.push('/account/orders')}
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
+                className="bg-primary text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary transition"
               >
                 View Orders
               </button>
@@ -207,22 +207,22 @@ export default function CheckoutPage() {
         {/* Progress Steps */}
         <div className="mb-8 flex items-center justify-center">
           <div className="flex items-center">
-            <div className={`flex items-center ${step >= 1 ? 'text-blue-600' : 'text-gray-400'}`}>
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 ${step >= 1 ? 'border-blue-600 bg-blue-50' : 'border-gray-300'}`}>
+            <div className={`flex items-center ${step >= 1 ? 'text-primary' : 'text-gray-400'}`}>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 ${step >= 1 ? 'border-primary bg-surface' : 'border-gray-300'}`}>
                 <Truck className="w-5 h-5" />
               </div>
               <span className="ml-2 font-semibold">Shipping</span>
             </div>
-            <div className={`w-24 h-1 mx-4 ${step >= 2 ? 'bg-blue-600' : 'bg-gray-300'}`}></div>
-            <div className={`flex items-center ${step >= 2 ? 'text-blue-600' : 'text-gray-400'}`}>
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 ${step >= 2 ? 'border-blue-600 bg-blue-50' : 'border-gray-300'}`}>
+            <div className={`w-24 h-1 mx-4 ${step >= 2 ? 'bg-primary' : 'bg-gray-300'}`}></div>
+            <div className={`flex items-center ${step >= 2 ? 'text-primary' : 'text-gray-400'}`}>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 ${step >= 2 ? 'border-primary bg-surface' : 'border-gray-300'}`}>
                 <CreditCard className="w-5 h-5" />
               </div>
               <span className="ml-2 font-semibold">Payment</span>
             </div>
-            <div className={`w-24 h-1 mx-4 ${step >= 3 ? 'bg-blue-600' : 'bg-gray-300'}`}></div>
-            <div className={`flex items-center ${step >= 3 ? 'text-blue-600' : 'text-gray-400'}`}>
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 ${step >= 3 ? 'border-blue-600 bg-blue-50' : 'border-gray-300'}`}>
+            <div className={`w-24 h-1 mx-4 ${step >= 3 ? 'bg-primary' : 'bg-gray-300'}`}></div>
+            <div className={`flex items-center ${step >= 3 ? 'text-primary' : 'text-gray-400'}`}>
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 ${step >= 3 ? 'border-primary bg-surface' : 'border-gray-300'}`}>
                 <CheckCircle className="w-5 h-5" />
               </div>
               <span className="ml-2 font-semibold">Confirmation</span>
@@ -254,7 +254,7 @@ export default function CheckoutPage() {
                         required
                         value={shippingData.firstName}
                         onChange={(e) => setShippingData({ ...shippingData, firstName: e.target.value })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                       />
                     </div>
                     <div>
@@ -266,7 +266,7 @@ export default function CheckoutPage() {
                         required
                         value={shippingData.lastName}
                         onChange={(e) => setShippingData({ ...shippingData, lastName: e.target.value })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                       />
                     </div>
                   </div>
@@ -280,7 +280,7 @@ export default function CheckoutPage() {
                       required
                       value={shippingData.email}
                       onChange={(e) => setShippingData({ ...shippingData, email: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                     />
                   </div>
 
@@ -291,9 +291,10 @@ export default function CheckoutPage() {
                     <input
                       type="tel"
                       required
+                      placeholder="+94 77 123 4567"
                       value={shippingData.phone}
                       onChange={(e) => setShippingData({ ...shippingData, phone: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                     />
                   </div>
 
@@ -306,7 +307,7 @@ export default function CheckoutPage() {
                       required
                       value={shippingData.address}
                       onChange={(e) => setShippingData({ ...shippingData, address: e.target.value })}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                     />
                   </div>
 
@@ -320,7 +321,7 @@ export default function CheckoutPage() {
                         required
                         value={shippingData.city}
                         onChange={(e) => setShippingData({ ...shippingData, city: e.target.value })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                       />
                     </div>
                     <div>
@@ -332,7 +333,7 @@ export default function CheckoutPage() {
                         required
                         value={shippingData.state}
                         onChange={(e) => setShippingData({ ...shippingData, state: e.target.value })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                       />
                     </div>
                     <div>
@@ -344,14 +345,14 @@ export default function CheckoutPage() {
                         required
                         value={shippingData.zipCode}
                         onChange={(e) => setShippingData({ ...shippingData, zipCode: e.target.value })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                       />
                     </div>
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition"
+                    className="w-full bg-gradient-to-r from-primary to-accent text-white py-3 rounded-lg font-semibold hover:from-primary-light hover:to-accent-light transition"
                   >
                     Continue to Payment
                   </button>
@@ -367,7 +368,7 @@ export default function CheckoutPage() {
                 <div className="mb-6">
                   <button
                     onClick={() => setStep(1)}
-                    className="text-blue-600 hover:text-blue-700 text-sm font-semibold"
+                    className="text-primary hover:text-primary-light text-sm font-semibold"
                   >
                     ← Edit Shipping Information
                   </button>
@@ -439,7 +440,7 @@ export default function CheckoutPage() {
                       </h4>
                       <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
                       <p className="text-sm font-bold text-gray-900">
-                        ${((item.discount_price || item.price) * item.quantity).toFixed(2)}
+                        Rs {((item.discount_price || item.price) * item.quantity).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                       </p>
                     </div>
                   </div>
@@ -450,20 +451,20 @@ export default function CheckoutPage() {
               <div className="space-y-3 border-t pt-4">
                 <div className="flex justify-between text-gray-600">
                   <span>Subtotal</span>
-                  <span>${subtotal.toFixed(2)}</span>
+                  <span>Rs {subtotal.toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                 </div>
                 <div className="flex justify-between text-gray-600">
                   <span>Shipping</span>
-                  <span>{shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`}</span>
+                  <span>{shipping === 0 ? 'Free' : `$Rs {shipping.toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}</span>
                 </div>
                 <div className="flex justify-between text-gray-600">
                   <span>Tax (10%)</span>
-                  <span>${tax.toFixed(2)}</span>
+                  <span>Rs {tax.toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                 </div>
                 <div className="border-t pt-3">
                   <div className="flex justify-between text-lg font-bold text-gray-900">
                     <span>Total</span>
-                    <span>${total.toFixed(2)}</span>
+                    <span>Rs {total.toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                   </div>
                 </div>
               </div>

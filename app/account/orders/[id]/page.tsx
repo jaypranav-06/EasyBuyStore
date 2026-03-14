@@ -84,7 +84,7 @@ export default async function OrderDetailPage({ params }: { params: { id: string
         <div className="mb-8">
           <Link
             href="/account/orders"
-            className="inline-flex items-center text-blue-600 hover:text-blue-700 mb-4"
+            className="inline-flex items-center text-primary hover:text-primary-light mb-4"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Orders
@@ -109,10 +109,10 @@ export default async function OrderDetailPage({ params }: { params: { id: string
                 order.order_status === 'completed'
                   ? 'bg-green-100 text-green-700'
                   : order.order_status === 'shipped'
-                  ? 'bg-blue-100 text-blue-700'
+                  ? 'bg-gray-100 text-primary'
                   : order.order_status === 'processing'
                   ? 'bg-yellow-100 text-yellow-700'
-                  : 'bg-orange-100 text-orange-700'
+                  : 'bg-gray-100 text-orange-700'
               }`}
             >
               {order.order_status}
@@ -183,7 +183,7 @@ export default async function OrderDetailPage({ params }: { params: { id: string
                   <div className="flex-1">
                     <Link
                       href={`/products/${item.product_id}`}
-                      className="font-semibold text-gray-900 hover:text-blue-600 text-lg"
+                      className="font-semibold text-gray-900 hover:text-primary text-lg"
                     >
                       {item.product?.product_name || 'Product'}
                     </Link>
@@ -191,12 +191,12 @@ export default async function OrderDetailPage({ params }: { params: { id: string
                       Quantity: <span className="font-semibold">{item.quantity}</span>
                     </p>
                     <p className="text-gray-600">
-                      Price: <span className="font-semibold">${Number(item.price).toFixed(2)}</span>
+                      Price: <span className="font-semibold">Rs {Number(item.price).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                     </p>
                   </div>
                   <div className="text-right">
                     <p className="text-lg font-bold text-gray-900">
-                      ${Number(item.subtotal).toFixed(2)}
+                      Rs {Number(item.subtotal).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </p>
                   </div>
                 </div>
@@ -221,22 +221,22 @@ export default async function OrderDetailPage({ params }: { params: { id: string
                 </div>
                 <div className="flex justify-between text-gray-600">
                   <span>Shipping</span>
-                  <span>${Number(order.shipping_cost || 0).toFixed(2)}</span>
+                  <span>Rs {Number(order.shipping_cost || 0).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                 </div>
                 <div className="flex justify-between text-gray-600">
                   <span>Tax</span>
-                  <span>${Number(order.tax_amount || 0).toFixed(2)}</span>
+                  <span>Rs {Number(order.tax_amount || 0).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                 </div>
                 {order.discount_amount && Number(order.discount_amount) > 0 && (
-                  <div className="flex justify-between text-green-600">
+                  <div className="flex justify-between text-success">
                     <span>Discount</span>
-                    <span>-${Number(order.discount_amount).toFixed(2)}</span>
+                    <span>-Rs {Number(order.discount_amount).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                   </div>
                 )}
                 <div className="border-t pt-3">
                   <div className="flex justify-between text-lg font-bold text-gray-900">
                     <span>Total</span>
-                    <span>${Number(order.total).toFixed(2)}</span>
+                    <span>Rs {Number(order.total).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                   </div>
                 </div>
               </div>
@@ -268,7 +268,7 @@ export default async function OrderDetailPage({ params }: { params: { id: string
                   <span className="font-semibold text-gray-900">Status:</span>{' '}
                   <span
                     className={`${
-                      order.payment_status === 'paid' ? 'text-green-600' : 'text-orange-600'
+                      order.payment_status === 'paid' ? 'text-success' : 'text-accent'
                     } font-semibold`}
                   >
                     {order.payment_status}
@@ -293,7 +293,7 @@ export default async function OrderDetailPage({ params }: { params: { id: string
               {order.order_status === 'completed' && (
                 <Link
                   href="/products"
-                  className="block text-center px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition"
+                  className="block text-center px-6 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-lg font-semibold hover:from-primary-light hover:to-accent-light transition"
                 >
                   Buy Again
                 </Link>

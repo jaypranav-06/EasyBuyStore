@@ -54,19 +54,19 @@ export default async function AdminOrdersPage() {
           <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
         </div>
         <div className="bg-orange-50 rounded-lg shadow-sm p-4">
-          <p className="text-sm text-orange-600 mb-1">Pending</p>
+          <p className="text-sm text-accent mb-1">Pending</p>
           <p className="text-2xl font-bold text-orange-700">{stats.pending}</p>
         </div>
         <div className="bg-yellow-50 rounded-lg shadow-sm p-4">
           <p className="text-sm text-yellow-600 mb-1">Processing</p>
           <p className="text-2xl font-bold text-yellow-700">{stats.processing}</p>
         </div>
-        <div className="bg-blue-50 rounded-lg shadow-sm p-4">
-          <p className="text-sm text-blue-600 mb-1">Shipped</p>
-          <p className="text-2xl font-bold text-blue-700">{stats.shipped}</p>
+        <div className="bg-surface rounded-lg shadow-sm p-4">
+          <p className="text-sm text-primary mb-1">Shipped</p>
+          <p className="text-2xl font-bold text-primary">{stats.shipped}</p>
         </div>
         <div className="bg-green-50 rounded-lg shadow-sm p-4">
-          <p className="text-sm text-green-600 mb-1">Completed</p>
+          <p className="text-sm text-success mb-1">Completed</p>
           <p className="text-2xl font-bold text-green-700">{stats.completed}</p>
         </div>
       </div>
@@ -118,14 +118,14 @@ export default async function AdminOrdersPage() {
                       {order.order_items.length}
                     </td>
                     <td className="py-4 px-6 font-semibold text-gray-900 text-sm">
-                      ${Number(order.total).toFixed(2)}
+                      Rs {Number(order.total).toLocaleString("en-LK", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </td>
                     <td className="py-4 px-6">
                       <span
                         className={`inline-block px-2 py-1 rounded-full text-xs font-semibold ${
                           order.payment_status === 'paid'
                             ? 'bg-green-100 text-green-700'
-                            : 'bg-orange-100 text-orange-700'
+                            : 'bg-gray-100 text-orange-700'
                         }`}
                       >
                         {order.payment_status}
@@ -137,10 +137,10 @@ export default async function AdminOrdersPage() {
                           order.order_status === 'completed'
                             ? 'bg-green-100 text-green-700'
                             : order.order_status === 'shipped'
-                            ? 'bg-blue-100 text-blue-700'
+                            ? 'bg-gray-100 text-primary'
                             : order.order_status === 'processing'
                             ? 'bg-yellow-100 text-yellow-700'
-                            : 'bg-orange-100 text-orange-700'
+                            : 'bg-gray-100 text-orange-700'
                         }`}
                       >
                         {order.order_status}
@@ -149,7 +149,7 @@ export default async function AdminOrdersPage() {
                     <td className="py-4 px-6">
                       <Link
                         href={`/admin/orders/${order.id}`}
-                        className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-700 font-semibold text-sm"
+                        className="inline-flex items-center gap-1 text-primary hover:text-primary-light font-semibold text-sm"
                       >
                         <Eye className="w-4 h-4" />
                         View

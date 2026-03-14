@@ -45,10 +45,10 @@ export default function ContactPage() {
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20 px-4">
+      <div className="bg-gradient-to-r from-primary to-accent text-white py-20 px-4">
         <div className="container mx-auto text-center">
           <h1 className="text-5xl font-bold mb-4">Get in Touch</h1>
-          <p className="text-xl text-blue-100 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-100 max-w-3xl mx-auto">
             Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
           </p>
         </div>
@@ -63,44 +63,44 @@ export default function ContactPage() {
 
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-6 h-6 text-blue-600" />
+                  <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-6 h-6 text-primary" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Email</h3>
-                    <p className="text-gray-600">support@velvetvogue.com</p>
-                    <p className="text-gray-600">sales@velvetvogue.com</p>
+                    <p className="text-gray-600">contact@easybuystore.com</p>
+                    <p className="text-gray-600">support@easybuystore.com</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6 text-purple-600" />
+                  <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-6 h-6 text-accent" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Phone</h3>
-                    <p className="text-gray-600">+1 (555) 123-4567</p>
-                    <p className="text-gray-600">+1 (555) 765-4321</p>
+                    <p className="text-gray-600">+94 (11) 234-5678</p>
+                    <p className="text-gray-600">+94 (77) 123-4567</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-green-600" />
+                    <MapPin className="w-6 h-6 text-success" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Address</h3>
                     <p className="text-gray-600">
-                      123 Fashion Street<br />
-                      New York, NY 10001<br />
-                      United States
+                      245, 3 De Fonseka Pl<br />
+                      Colombo 00400<br />
+                      Sri Lanka
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-6 h-6 text-orange-600" />
+                  <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-6 h-6 text-accent" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-1">Business Hours</h3>
@@ -113,10 +113,10 @@ export default function ContactPage() {
             </div>
 
             {/* FAQ Link */}
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-6 text-white">
+            <div className="bg-gradient-to-r from-primary to-accent rounded-lg p-6 text-white">
               <h3 className="text-xl font-bold mb-2">Looking for quick answers?</h3>
-              <p className="text-blue-100 mb-4">Check out our FAQ section for instant help with common questions.</p>
-              <button className="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-blue-50 transition">
+              <p className="text-gray-100 mb-4">Check out our FAQ section for instant help with common questions.</p>
+              <button className="bg-white text-primary px-6 py-2 rounded-lg font-semibold hover:bg-surface transition">
                 View FAQ
               </button>
             </div>
@@ -149,7 +149,7 @@ export default function ContactPage() {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                     placeholder="John Doe"
                   />
                 </div>
@@ -163,7 +163,7 @@ export default function ContactPage() {
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                     placeholder="john@example.com"
                   />
                 </div>
@@ -177,7 +177,7 @@ export default function ContactPage() {
                     required
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
                     placeholder="How can we help you?"
                   />
                 </div>
@@ -191,7 +191,7 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent resize-none"
                     placeholder="Tell us more about your inquiry..."
                   />
                 </div>
@@ -199,7 +199,7 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-primary to-accent text-white py-4 rounded-lg font-semibold hover:from-primary-light hover:to-accent-light transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   <Send className="w-5 h-5" />
                   {loading ? 'Sending...' : 'Send Message'}
@@ -218,40 +218,40 @@ export default function ContactPage() {
           <h2 className="text-2xl font-bold text-gray-900 mb-8 text-center">Other Ways to Reach Us</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="bg-white rounded-lg shadow-sm p-6 text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Mail className="w-8 h-8 text-blue-600" />
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Mail className="w-8 h-8 text-primary" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">Email Support</h3>
               <p className="text-gray-600 mb-4">Get detailed responses to your questions via email.</p>
               <a
-                href="mailto:support@velvetvogue.com"
-                className="text-blue-600 hover:text-blue-700 font-semibold"
+                href="mailto:support@easybuystore.com"
+                className="text-primary hover:text-primary-light font-semibold"
               >
-                support@velvetvogue.com
+                support@easybuystore.com
               </a>
             </div>
 
             <div className="bg-white rounded-lg shadow-sm p-6 text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Phone className="w-8 h-8 text-purple-600" />
+              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Phone className="w-8 h-8 text-accent" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">Phone Support</h3>
               <p className="text-gray-600 mb-4">Speak directly with our customer service team.</p>
               <a
-                href="tel:+15551234567"
-                className="text-blue-600 hover:text-blue-700 font-semibold"
+                href="tel:+94112345678"
+                className="text-primary hover:text-primary-light font-semibold"
               >
-                +1 (555) 123-4567
+                +94 (11) 234-5678
               </a>
             </div>
 
             <div className="bg-white rounded-lg shadow-sm p-6 text-center">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <MapPin className="w-8 h-8 text-green-600" />
+                <MapPin className="w-8 h-8 text-success" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2">Visit Us</h3>
               <p className="text-gray-600 mb-4">Stop by our office for in-person assistance.</p>
-              <button className="text-blue-600 hover:text-blue-700 font-semibold">
+              <button className="text-primary hover:text-primary-light font-semibold">
                 Get Directions
               </button>
             </div>
