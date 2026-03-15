@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
+import Google from 'next-auth/providers/google';
 import { authConfig } from './auth.config';
 import { z } from 'zod';
 import bcrypt from 'bcryptjs';
@@ -16,6 +17,10 @@ const loginSchema = z.object({
 const config = {
   ...authConfig,
   providers: [
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
     Credentials({
       async authorize(credentials) {
         console.log(' Auth attempt:', credentials);
@@ -81,19 +86,56 @@ const config = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user, trigger }: { token: JWT; user: User | null; trigger?: string }) {
+    async jwt({ token, user, trigger, account }: { token: JWT; user: User | null; trigger?: string; account?: any }) {
       console.log(' JWT callback - user:', user);
+      console.log(' JWT callback - account:', account);
       console.log(' JWT callback - token before:', token);
       console.log(' JWT callback - trigger:', trigger);
 
       // Call the base jwt callback from authConfig first
       if (authConfig.callbacks?.jwt) {
-        token = await authConfig.callbacks.jwt({ token, user, trigger } as any);
+        token = await authConfig.callbacks.jwt({ token, user, trigger, account } as any);
+      }
+
+      // Handle Google sign-in: create user in Supabase if doesn't exist
+      if (account?.provider === 'google' && user?.email) {
+        console.log(' Google sign-in detected, checking if user exists...');
+
+        try {
+          // Check if user exists in database
+          let dbUser = await prisma.user.findUnique({
+            where: { email: user.email },
+          });
+
+          // If user doesn't exist, create them
+          if (!dbUser) {
+            console.log(' Creating new user from Google sign-in...');
+            const [firstName, ...lastNameParts] = (user.name || '').split(' ');
+            dbUser = await prisma.user.create({
+              data: {
+                email: user.email,
+                first_name: firstName || 'User',
+                last_name: lastNameParts.join(' ') || '',
+                password_hash: '', // No password for OAuth users
+                phone: '',
+              },
+            });
+            console.log(' New user created:', dbUser.user_id);
+          } else {
+            console.log(' Existing user found:', dbUser.user_id);
+          }
+
+          // Set user ID and role in token
+          token.id = dbUser.user_id.toString();
+          token.role = 'user';
+        } catch (error) {
+          console.error(' Error handling Google sign-in:', error);
+        }
       }
 
       // Then add our additional properties
       if (user) {
-        token.id = user.id;
+        token.id = token.id || user.id;
       }
       console.log(' JWT callback - token after:', token);
       return token;
