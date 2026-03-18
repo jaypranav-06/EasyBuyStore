@@ -36,18 +36,18 @@ async function checkDatabaseConnection() {
 
 async function checkTables() {
   const tables = [
-    { name: 'users', model: prisma.user },
-    { name: 'admin_users', model: prisma.adminUser },
-    { name: 'products', model: prisma.product },
-    { name: 'categories', model: prisma.category },
-    { name: 'orders', model: prisma.order },
-    { name: 'cart_items', model: prisma.cartItem },
-    { name: 'wishlist', model: prisma.wishlist },
+    { name: 'users', fn: () => prisma.user.count() },
+    { name: 'admin_users', fn: () => prisma.adminUser.count() },
+    { name: 'products', fn: () => prisma.product.count() },
+    { name: 'categories', fn: () => prisma.category.count() },
+    { name: 'payment_orders', fn: () => prisma.paymentOrder.count() },
+    { name: 'cart_items', fn: () => prisma.cartItem.count() },
+    { name: 'reviews', fn: () => prisma.review.count() },
   ];
 
   for (const table of tables) {
     try {
-      const count = await table.model.count();
+      const count = await table.fn();
       results.push({
         name: `Table: ${table.name}`,
         status: 'pass',

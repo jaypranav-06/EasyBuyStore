@@ -18,8 +18,7 @@ async function main() {
   if (existingAdmin) {
     console.log('  Admin account already exists!');
     console.log(' Email:', adminEmail);
-    console.log(' Name:', existingAdmin.name);
-    console.log(' Role:', existingAdmin.role);
+    console.log(' Name:', `${existingAdmin.first_name} ${existingAdmin.last_name}`);
     return;
   }
 
@@ -27,14 +26,19 @@ async function main() {
   const hashedPassword = await bcrypt.hash(adminPassword, 10);
 
   // Create admin user
+  const [firstName, ...lastNameParts] = adminName.split(' ');
   const admin = await prisma.user.create({
     data: {
-      name: adminName,
+      first_name: firstName,
+      last_name: lastNameParts.join(' ') || 'User',
       email: adminEmail,
-      password: hashedPassword,
-      role: 'admin',
+      password_hash: hashedPassword,
       phone: '+1-555-ADMIN',
-      address: '123 Admin Street, Admin City, AC 12345',
+      address: '123 Admin Street',
+      city: 'Admin City',
+      state: 'AC',
+      zip_code: '12345',
+      country: 'USA',
     },
   });
 
@@ -43,8 +47,7 @@ async function main() {
   console.log('');
   console.log(' Email:    ', adminEmail);
   console.log(' Password: ', adminPassword);
-  console.log(' Name:     ', adminName);
-  console.log(' Role:     ', admin.role);
+  console.log(' Name:     ', `${admin.first_name} ${admin.last_name}`);
   console.log('');
   console.log('\n  IMPORTANT: Please change the password after first login!');
   console.log('\n Login at: http://localhost:3000/signin');

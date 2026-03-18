@@ -15,7 +15,7 @@ model AdminUser {
   password_hash String
   role          String   @default("admin")
   created_at    DateTime @default(now())
-  updated_at    DateTime
+  updated_at    DateTime @updatedAt
 
   @@map("admin_users")
 }
@@ -41,7 +41,7 @@ model Category {
   image_url     String?
   is_active     Boolean   @default(true)
   created_at    DateTime  @default(now())
-  updated_at    DateTime
+  updated_at    DateTime  @updatedAt
   products      Product[]
 
   @@map("categories")
@@ -59,7 +59,7 @@ model Contact {
   priority   String?  @default("normal")
   status     String   @default("new")
   created_at DateTime @default(now())
-  updated_at DateTime
+  updated_at DateTime @updatedAt
 
   @@map("contacts")
 }
@@ -106,7 +106,7 @@ model PaymentOrder {
   delivered_at          DateTime?
   estimated_delivery    DateTime?
   created_at            DateTime    @default(now())
-  updated_at            DateTime
+  updated_at            DateTime    @updatedAt
   order_items           OrderItem[]
   user                  User        @relation(fields: [user_id], references: [user_id])
 
@@ -127,7 +127,7 @@ model Product {
   is_new         Boolean    @default(false)
   is_bestseller  Boolean    @default(false)
   created_at     DateTime   @default(now())
-  updated_at     DateTime
+  updated_at     DateTime   @updatedAt
   cart_items     CartItem[]
   order_items    OrderItem[]
   category       Category?  @relation(fields: [category_id], references: [category_id])
@@ -148,7 +148,7 @@ model PromoCode {
   start_date           DateTime
   end_date             DateTime
   created_at           DateTime @default(now())
-  updated_at           DateTime
+  updated_at           DateTime @updatedAt
 
   @@map("promo_codes")
 }
@@ -166,7 +166,7 @@ model Review {
   helpful_count        Int          @default(0)
   unhelpful_count      Int          @default(0)
   created_at           DateTime     @default(now())
-  updated_at           DateTime
+  updated_at           DateTime     @updatedAt
   product              Product      @relation(fields: [product_id], references: [product_id])
   user                 User         @relation(fields: [user_id], references: [user_id])
   review_votes         ReviewVote[]
@@ -200,7 +200,7 @@ model User {
   zip_code       String?
   country        String?
   created_at     DateTime       @default(now())
-  updated_at     DateTime
+  updated_at     DateTime       @updatedAt
   cart_items     CartItem[]
   payment_orders PaymentOrder[]
   reviews        Review[]
