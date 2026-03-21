@@ -8,8 +8,6 @@ const nextConfig = {
       },
     ],
   },
-  // This is important for Netlify deployment
-  output: 'standalone',
 };
 
 module.exports = nextConfig;
