@@ -21,6 +21,7 @@ export default function NewProductPage() {
   const [formData, setFormData] = useState({
     product_name: '',
     description: '',
+    keywords: '',
     price: '',
     discount_price: '',
     stock_quantity: '',
@@ -199,6 +200,23 @@ export default function NewProductPage() {
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
               placeholder="Enter product description"
             />
+          </div>
+
+          {/* Keywords/Tags */}
+          <div className="md:col-span-2">
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Keywords / Search Tags
+            </label>
+            <input
+              type="text"
+              value={formData.keywords || ''}
+              onChange={(e) => setFormData({ ...formData, keywords: e.target.value })}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-transparent"
+              placeholder="e.g., casual, cotton, summer, shirt, men, fashion"
+            />
+            <p className="text-xs text-gray-500 mt-2">
+              Add keywords to help customers find this product. Separate with commas. Include synonyms, styles, materials, occasions, etc.
+            </p>
           </div>
 
           {/* Price */}

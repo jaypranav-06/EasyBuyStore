@@ -36,11 +36,12 @@ export async function GET(request: NextRequest) {
       where.is_bestseller = true;
     }
 
-    // Add search filter
+    // Add search filter - searches in name, description, and keywords
     if (search) {
       where.OR = [
         { product_name: { contains: search, mode: 'insensitive' } },
         { description: { contains: search, mode: 'insensitive' } },
+        { keywords: { contains: search, mode: 'insensitive' } },
       ];
     }
 

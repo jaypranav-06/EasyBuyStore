@@ -126,6 +126,7 @@ model Product {
   is_featured    Boolean    @default(false)
   is_new         Boolean    @default(false)
   is_bestseller  Boolean    @default(false)
+  keywords       String?
   created_at     DateTime   @default(now())
   updated_at     DateTime   @updatedAt
   cart_items     CartItem[]
